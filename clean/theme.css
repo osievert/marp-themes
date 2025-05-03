@@ -1,0 +1,202 @@
+/* @theme clean */
+
+@import "default";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;450;500;550;600;650;700;750&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css');
+
+:root {
+  --primary-accent-color: #405080;
+  --background-color: #ffffff;
+  --code-background-color: #eaeaea;
+  --code-weight: 400;
+  --inline-code-background-color: #ffffff;
+  --inline-code-color: #141414;
+  --inline-code-weight: 650;
+  --note-accent-color: #707000;
+  --note-color: #000000;
+  --note-background-color: #f0f0a0;
+  --note-font-scale: 1.0;
+  --note-icon: '\f071';  /* any FontAwesome codepoint */
+  --page-number-color: #808080;
+  --page-number-font-scale: 0.7;
+  --subtitle-font-scale: 0.8;
+  --subtitle-background-color: #e0e0e0;
+  --subtitle-color: #304080;
+  --footer-font-scale: 0.7;
+  --footer-background-color: #e0e0e0;
+  --footer-color: #304080;
+  --font-size: 24px;
+  --content-font-scale: 1.0;
+  --title-font-scale: 1.4;
+  --code-font-scale: 0.68;
+  --inline-code-font-scale: 1.0;
+}
+
+section {
+  background-color: var(--background-color);
+  padding: calc(0.7 * var(--font-size));
+  padding-top: calc(1.4 * var(--font-size) * var(--title-font-scale) + 5px);
+
+  font-family: 'Noto Sans', sans-serif;
+  font-size: calc(var(--font-size) * var(--content-font-scale));
+}
+
+/* if a subttile is present, add padding to the top of the section */
+section:has(.subtitle) {
+  padding-top: calc(1.4 * var(--font-size) * var(--title-font-scale) + 1.5 * var(--font-size) * var(--subtitle-font-scale) + 5px);
+}
+
+.subtitle {
+  font-size: calc(var(--font-size) * var(--subtitle-font-scale));
+  text-align: left;
+  position: absolute;
+  top: calc(1.5 * var(--font-size) * var(--title-font-scale) + 10px);
+  left: 0;
+  padding: 0;
+  width: 100%;
+  background-color: var(--subtitle-background-color);
+  color: var(--subtitle-color);
+  /* text-indent: calc(0.5 * var(--font-size) * var(--title-font-scale)); */
+  text-indent: calc(0.7 * var(--font-size));
+}
+
+footer {
+  background-color: var(--footer-background-color);
+  font-size: calc(var(--font-size) * var(--footer-font-scale));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.1em 0 0.1em 0;
+  text-align: left;
+  width: 100%;
+  color: var(--footer-color);
+  text-indent: calc(0.7 * var(--font-size));
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #141414;
+}
+
+/* the first h1 becomes the slide title */
+h1:nth-of-type(1) {
+  font-size: calc(var(--font-size) * var(--title-font-scale));
+  color: #ffffff;
+  background-color: var(--primary-accent-color);
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 1.5em;
+  /* text-indent: 0.5em; */
+  text-indent: calc(0.7 * var(--font-size));
+}
+
+/* pre matches some but not all things in ```-delimited code blacks */
+pre {
+  background-color: var(--code-background-color);
+  border: 0;
+}
+
+/* This targets code inside pre blocks (only ```-delimited text) */
+pre code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: calc(var(--font-size) * var(--code-font-scale));
+  font-weight: var(--code-weight);
+  padding: 0;
+}
+
+/* This targets standalone code elements (`-delimited text) */
+code:not(pre code) {
+  font-family: 'Source Code Pro', monospace;
+  color: var(--inline-code-color);
+  font-weight: var(--inline-code-weight);
+  background-color: var(--inline-code-background-color);
+  font-size: valc(var(--font-size) * var(--inline-code-font-scale));
+  border: 0;
+  padding: 0 0.1em;
+}
+
+/* Adjust code within headings */
+h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+  font-weight: calc(var(--code-weight) - 50);
+  padding: 0;
+  margin-left: 0;
+}
+
+/* formatting page numbers  */
+section::after {
+  font-size: calc(var(--font-size) * var(--page-number-font-scale));
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+  position: absolute;
+  text-align: right;
+  /* line-height: 1; */
+  bottom: 0;
+  right: 0;
+  padding: 0.1em 0 0.1em 0;
+  width: 100%;
+  left: -0.5em;
+  color: var(--page-number-color);
+}
+
+.katex {
+  font: normal 1.05em KaTeX_Main, "Times New Roman", serif
+}
+
+/* https://github.com/marp-team/marpit/issues/141#issuecomment-473204518 */
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* title slide title */
+section.title>h1 {
+  color: #ffffff;
+  background-color: var(--primary-accent-color);
+  border-radius: 10px;
+  text-align: center;
+  top: 25%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  padding-bottom: 0.35em;
+  height: auto;
+}
+
+/* title slide paragraph */
+section.title>p {
+  position: relative;
+  text-align: center;
+  top: 85px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.note {
+  background-color: var(--note-background-color);
+  font-size: calc(var(--font-size) * var(--note-font-scale));
+  border-style: solid;
+  border-width: 0px;
+  border-radius: 15px;
+  border-color: var(--note-accent-color);
+  padding: 8px;
+  color: var(--note-color);
+}
+
+.note::before {
+  content: var(--note-icon);
+  font-family: FontAwesome;
+  font-size: calc(var(--font-size) * 1.1 * var(--note-font-scale));
+  margin-left: 0.2em;
+  margin-right: 3px;
+  color: var(--note-accent-color);
+}
